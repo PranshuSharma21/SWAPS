@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — SWAPS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-subtle: #f8fafc;
+      --black: #000000;
+      --black-surface: #0b0b0e;
+      --black-border: #222227;
+      --blue: #2563eb;
+      --blue-hover: #1d4ed8;
+      --blue-light: #eff6ff;
+      --blue-glow: rgba(37, 99, 235, 0.4);
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --shadow-box: 0 16px 36px -8px rgba(0, 0, 0, 0.08);
+      --shadow-card: 0 20px 40px -12px rgba(15, 23, 42, 0.07);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .canvas-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .header-wrapper {
+      width: 100%;
+      background: var(--black);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--black-border);
+    }
+
+    .navbar {
+      width: 100%;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 1rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 2.2rem;
+    }
+
+    .nav-link {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--blue);
+      text-shadow: 0 0 12px var(--blue-glow);
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .nav-link.active {
+      color: var(--white);
+      position: relative;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    .nav-badge-wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .status-badge {
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--blue);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--blue);
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 3.5rem 1.5rem 6rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .center-container {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .brand-hero-title {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--black);
+      margin-bottom: 0.25rem;
+    }
+
+    .chat-question {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+
+    .chat-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 3rem;
+    }
+
+    .team-grid-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      min-height: 200px;
+    }
+
+    @media (max-width: 900px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .brand-hero-title { font-size: 3rem; }
+      .chat-question { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-wrapper">
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link active">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+        <li><a href="beta.html" class="nav-link">Beta Version</a></li>
+      </ul>
+
+      <div class="nav-badge-wrap">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Core Team</span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="canvas-background" id="canvasContainer"></div>
+
+  <main class="content-wrapper">
+    <div class="center-container">
+      <h1 class="brand-hero-title">SWAPS</h1>
+      <h2 class="chat-question">About Us</h2>
+      <p class="chat-desc">Meet the team behind the sustainable material lifecycle simulator and product circularity engine.</p>
+
+      <div id="teamGrid" class="team-grid-container"></div>
+    </div>
+  </main>
+
+  <script>
+    function init3DBackground() {
+      const container = document.getElementById("canvasContainer");
+      if (!container) return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 6.8;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const shapes = [
+        new THREE.TorusKnotGeometry(1.6, 0.38, 120, 16, 2, 3),
+        new THREE.IcosahedronGeometry(2.1, 1),
+        new THREE.DodecahedronGeometry(2.0, 1),
+        new THREE.OctahedronGeometry(2.2, 2),
+        new THREE.TetrahedronGeometry(2.4, 2),
+        new THREE.TorusGeometry(1.9, 0.45, 16, 90),
+        new THREE.CylinderGeometry(1.4, 1.4, 2.8, 16, 4, true)
+      ];
+      const chosenGeometry = shapes[Math.floor(Math.random() * shapes.length)];
+
+      const material = new THREE.MeshBasicMaterial({
+        color: 0x1d4ed8,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.38
+      });
+      const mesh = new THREE.Mesh(chosenGeometry, material);
+      scene.add(mesh);
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      window.addEventListener("mousemove", (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.0005;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.0005;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        mesh.rotation.x += 0.002;
+        mesh.rotation.y += 0.003;
+        mesh.rotation.x += mouseY * 0.05;
+        mesh.rotation.y += mouseX * 0.05;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      init3DBackground();
+    });
+  </script>
+</body>
+</html>
