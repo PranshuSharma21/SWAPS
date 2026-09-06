@@ -59,3 +59,61 @@ Over 80% of product-level environmental damage is locked in during the design an
 ---
 
 ## Architecture Flow
+
+
+Product / Vehicle Query
+│
+▼
+Category & Scale Detection
+(Kitchenware | Clothing | Electronics | Automotive)
+│
+┌─────┴─────┐
+▼           ▼
+Groq AI     Local Fallback
+(Live API)  (Calibrated Benchmarks)
+│           │
+└─────┬─────┘
+▼
+Structured Lifecycle Output
+├── Factory Carbon Footprint
+├── Years Till Landfill (Part Breakdown)
+├── Environmental Flaws
+└── 3 Relatable Swap Pointers
+│
+▼
+Interactive UI & Side-by-Side Compare
+
+
+
+---
+
+## Tech Stack
+
+* **Frontend:** HTML5, Modern CSS3 (CSS Variables, Flexbox, CSS Grid)
+* **3D Visuals:** Three.js (r128 WebGL Canvas, 3D Perspective Tilt Physics)
+* **Inference Engine:** Groq Cloud API (`llama-3.3-70b-versatile`)
+* **Local Simulator:** Deterministic category-scale heuristic engine
+* **Database & Webhooks:** Google Apps Script Web App connected to Google Sheets
+
+---
+
+## Project Structure
+
+
+├── index.html        # Main search terminal, 3D canvas, and comparison matrix
+├── style.css         # Master styling (theme variables, 3D tilt, card layouts)
+├── script.js         # Core logic, Three.js engine, Groq integration, local database
+├── about.html        # Core team showcase with internal 3D particle card systems
+├── contact.html      # Direct web communication portal connected to Google Sheets
+├── beta.html         # Early access testing lab with live email waitlist intake
+└── README.md         # Project documentation
+
+
+
+
+Sustainable Development Goals (SDGs)
+SDG 12: Responsible Consumption and Production: Empowers consumers and engineers with upstream transparency, prioritizing repair, reuse and material retention over disposal.
+
+SDG 9: Industry, Innovation and Infrastructure: Encourages circular product architectures, non destructive disassembly and modular manufacturing.
+
+SDG 13: Climate Action: Prevents embedded factory carbon emissions by extending real world product usage lifespans.
