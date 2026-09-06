@@ -33,7 +33,11 @@ const SUSTAINABILITY_DATABASE = {
       "Oils and curry stains permanently discolor the plastic surface, prompting consumers to discard it early.",
       "Over 90% of discarded food plastics end up in landfills because grease residue ruins recycling batches."
     ],
-    swapAdvice: "Swap to a food-grade 304 stainless steel tiffin or a borosilicate glass lunchbox. Stainless steel doesn't stain, lasts for decades, leaches no microplastics into hot meals, and is infinitely recyclable.",
+    swapPointers: [
+      "Swap to a 3-tier food-grade 304 stainless steel tiffin (brands like Milton or Signoraware)—it lasts 10+ years, doesn't stain from oils, and won't leach microplastics into hot food.",
+      "If you frequently reheat meals in an office microwave, pick a thermal borosilicate glass container with snap-lock silicone lids instead.",
+      "Keep your current plastic boxes strictly for cold pantry grain storage so you don't generate instant landfill waste."
+    ],
     comparisons: ["Stainless Steel Tiffin", "Borosilicate Glass Container"]
   },
   "stainless steel tiffin": {
@@ -70,7 +74,11 @@ const SUSTAINABILITY_DATABASE = {
       "Slightly heavier in a backpack than a thin plastic box.",
       "Requires more mining energy on day one than cheap disposable plastic."
     ],
-    swapAdvice: "Outstanding sustainable purchase. It pays off its factory carbon debt in under 6 months of daily use and eliminates plastic waste entirely from your routine.",
+    swapPointers: [
+      "Keep using it! It pays back its initial factory emissions in under 6 months of daily lunches and will never end up in a landfill.",
+      "Pair it with a compact insulated thermal bag if you want your food hot by lunch without relying on an office microwave.",
+      "If the silicone sealing ring stretches out after 4–5 years, buy simple replacement gaskets online instead of throwing the tins away."
+    ],
     comparisons: ["Tupperware Plastic Tiffin", "Borosilicate Glass Container"]
   },
   "tesla model 3 ev": {
@@ -114,7 +122,11 @@ const SUSTAINABILITY_DATABASE = {
       "Tires wear down much faster than on lighter cars, creating more rubber trash.",
       "Glued battery cells make fixing one dead cell too risky and expensive."
     ],
-    swapAdvice: "A solid electric choice if charged with clean energy. Keep your tires properly inflated and drive gently to stop rubber from wearing out prematurely.",
+    swapPointers: [
+      "Definitely worth buying if you have home charging and drive 30+ km daily—your lifetime running emissions will be 60% lower than petrol cars.",
+      "Maintain strict tire pressure and accelerate smoothly to avoid shedding premature tire dust into municipal storm drains.",
+      "If you only do occasional highway trips, consider an efficient compact hybrid (like the Honda City e:HEV or Toyota Prius) to avoid hauling 450 kg of battery deadweight."
+    ],
     comparisons: ["Toyota RAV4 Hybrid", "Polestar 2"]
   },
   "toyota rav4 hybrid": {
@@ -158,7 +170,11 @@ const SUSTAINABILITY_DATABASE = {
       "Produces localized air pollution that hurts urban air quality.",
       "Having both an engine and electric motors means double the maintenance parts."
     ],
-    swapAdvice: "Great choice if you don't have a spot to plug in an EV at home. If you do have a charger, an EV will produce far less pollution over 10 years.",
+    swapPointers: [
+      "Ideal choice if you live in an apartment without home charging—it skips the heavy mining footprint of large EV batteries.",
+      "If you have dedicated garage parking, swap to a plug-in hybrid (PHEV) or compact EV so your daily errands run entirely on clean electricity.",
+      "Use eco-drive modes and regenerative braking consistently to extend brake pad and tire life past 80,000 km."
+    ],
     comparisons: ["Tesla Model 3 EV", "Honda CR-V Hybrid"]
   },
   "fast fashion cotton t-shirt": {
@@ -195,7 +211,11 @@ const SUSTAINABILITY_DATABASE = {
       "Synthetic thread blends mean less than 1% of discarded garments are recycled into new clothes.",
       "High chemical runoff contaminates freshwater water tables in agricultural communities."
     ],
-    swapAdvice: "Choose certified organic cotton, recycled cotton, or high-density hemp t-shirts from brands that offer free garment repairs. Wearing a shirt for 2 years instead of 6 months cuts its annual footprint by 60%.",
+    swapPointers: [
+      "Swap to 100% certified organic cotton or hemp t-shirts from brands that guarantee reinforced collar seams and free repairs.",
+      "Wash your t-shirts inside out in cold water and air-dry them—this prevents fiber thinning and doubles garment lifespan.",
+      "Aim for the #30Wears rule: don't buy a shirt unless you know you will wear it at least 30 times, and repurpose old ones into kitchen dust rags."
+    ],
     comparisons: ["Organic Hemp T-Shirt", "Recycled Cotton T-Shirt"]
   },
   "flagship smartphone": {
@@ -232,7 +252,11 @@ const SUSTAINABILITY_DATABASE = {
       "Glued parts make replacing a simple battery so risky that repair shops charge too much.",
       "Less than 20% of global electronic waste is properly recycled."
     ],
-    swapAdvice: "Consider buying certified refurbished phones or modular phones like the Fairphone where you can change the battery yourself with a screwdriver.",
+    swapPointers: [
+      "Keep your current phone for 4+ years instead of upgrading at 2 years—simply getting an official $40 battery replacement cuts your tech footprint in half.",
+      "If you need another device, buy certified refurbished (via Apple Refurbished, Cashify, or BackMarket) to eliminate brand-new factory emissions.",
+      "Check out modular phones like the Fairphone 5 where you can replace the screen or battery yourself with an ordinary screwdriver in under 2 minutes."
+    ],
     comparisons: ["Modular Smartphone", "Refurbished Smartphone"]
   }
 };
@@ -378,11 +402,6 @@ document.addEventListener("DOMContentLoaded", () => {
     apiStatusText.textContent = "AI Key";
     document.getElementById("apiModal").classList.add("hidden");
   });
-
-  document.getElementById("betaLink").addEventListener("click", (e) => {
-    e.preventDefault();
-    alert("Beta version is coming soon!");
-  });
 });
 
 function openCompareModal() {
@@ -438,12 +457,11 @@ async function analyzeProduct(query) {
 
 async function callGroqAPI(query, apiKey) {
   const prompt = `Perform an accurate sustainability and material audit for: "${query}".
-CRITICAL: Calibrate carbon and parts precisely to the actual physical object. Never assume an item is a car or machine unless explicitly stated.
+CRITICAL: Calibrate carbon and parts precisely to the actual physical object.
 REALISTIC CARBON SCALES:
 - Kitchenware/Bottles/Tiffins/Plastics: 0.3 kg to 3 kg CO2.
 - Clothing/Apparel/Shoes: 4 kg to 25 kg CO2.
 - Electronics (phones, laptops, screens): 30 kg to 140 kg CO2.
-- Furniture (chairs, tables): 15 kg to 75 kg CO2.
 - Vehicles (cars, EVs, SUVs): 6,000 kg to 14,000 kg CO2.
 
 Return ONLY raw unescaped JSON with this exact structure and NO markdown ticks:
@@ -452,17 +470,17 @@ Return ONLY raw unescaped JSON with this exact structure and NO markdown ticks:
   "category": "Appropriate category",
   "score": number between 15 and 95,
   "carbonToMake": "Realistic carbon with unit",
-  "yearsInLandfill": "Realistic breakdown e.g. Seal: 3 yrs | Container: 400+ yrs",
+  "yearsInLandfill": "Realistic breakdown",
   "parts": [
     {
-      "name": "Exact component or material of this item",
+      "name": "Exact component or material",
       "carbonUsed": "Realistic portion of CO2",
       "landfillTime": "Years until discarded or degraded",
       "score": number 0-100,
       "impactSummary": "Plain words explaining raw material mining, toxic leaching, or factory molding."
     },
     {
-      "name": "Second realistic component",
+      "name": "Second component",
       "carbonUsed": "Realistic portion of CO2",
       "landfillTime": "Years",
       "score": number 0-100,
@@ -470,11 +488,15 @@ Return ONLY raw unescaped JSON with this exact structure and NO markdown ticks:
     }
   ],
   "flaws": [
-    "First realistic environmental flaw specific to this object",
+    "First realistic environmental flaw",
     "Second realistic flaw",
     "Third realistic flaw"
   ],
-  "swapAdvice": "Sensible advice on whether to buy it and a realistic greener product to swap it with.",
+  "swapPointers": [
+    "Relatable pointer 1 recommending an exact greener product or brand alternative to buy instead.",
+    "Relatable pointer 2 with everyday practical advice to prolong the item or reduce waste.",
+    "Relatable pointer 3 on what to look for when shopping for this category."
+  ],
   "comparisons": ["Realistic Green Swap 1", "Realistic Green Swap 2"]
 }`;
 
@@ -518,10 +540,6 @@ function detectItemCategory(query) {
 
   if (q.includes("car") || q.includes("ev") || q.includes("tesla") || q.includes("suv") || q.includes("truck") || q.includes("hybrid") || q.includes("vehicle") || q.includes("bike") || q.includes("motorcycle") || q.includes("scooter")) {
     return "automotive";
-  }
-
-  if (q.includes("chair") || q.includes("table") || q.includes("desk") || q.includes("sofa") || q.includes("bed") || q.includes("furniture") || q.includes("shelf")) {
-    return "furniture";
   }
 
   return "general";
@@ -571,7 +589,11 @@ function generateTailoredFallback(query) {
         "Microwaving hot food in plastic can leach plasticizers and microplastics directly into meals.",
         "Food grease residue causes recycling facilities to reject it and redirect it to landfills."
       ],
-      swapAdvice: `Swap to a 304 food-grade stainless steel tiffin or thermal borosilicate glass container. They never stain, release zero microplastics into hot food, and last for decades without needing replacement.`,
+      swapPointers: [
+        `Switch to a high-grade 304 stainless steel container or borosilicate glass tiffin—they never retain greasy odors or leach microplastics into hot food.`,
+        `If you need a seal that doesn't leak in a backpack, look for clip-lock lids with food-safe silicone gaskets rather than all-plastic snap hinges.`,
+        `Never throw away your existing plastic containers right away—repurpose them for sorting dry kitchen spices, nails, or stationery to maximize their life.`
+      ],
       comparisons: ["Stainless Steel Tiffin", "Borosilicate Glass Container"]
     };
   }
@@ -613,7 +635,11 @@ function generateTailoredFallback(query) {
         "Less than 1% of post-consumer clothing waste is recycled back into wearable garments.",
         "Thin weaves and fast fashion seams stretch and unravel after only 15 to 25 wash cycles."
       ],
-      swapAdvice: `Look for garments made from 100% certified organic cotton, linen, or recycled wool with reinforced seams. Natural unblended fibers compost cleanly and last 3 to 5 times longer.`,
+      swapPointers: [
+        `Prioritize garments labeled 100% certified organic cotton, linen, or recycled wool rather than poly-cotton blends that can't be recycled.`,
+        `Wash clothes with cold water and hang dry—skipping the electric tumble dryer prevents fabric pilling and cuts household laundry emissions by 75%.`,
+        `Try thrift shopping or clothing rentals for event wear to keep existing clothing in active circulation instead of fueling fast-fashion factory runs.`
+      ],
       comparisons: ["Organic Cotton Alternative", "Recycled Fabric Garment"]
     };
   }
@@ -655,7 +681,11 @@ function generateTailoredFallback(query) {
         "Glued components prevent easy, low-cost battery replacement at home or in local shops.",
         "Less than 20% of global electronic waste is formally gathered and recycled."
       ],
-      swapAdvice: `Consider choosing certified refurbished models or modular electronics designed with standard screws that let you replace the battery in under 5 minutes.`,
+      swapPointers: [
+        `Instead of buying brand new, purchase certified refurbished models (like Apple Certified, BackMarket, or Cashify) to bypass new chip manufacturing emissions.`,
+        `If your current device is lagging or dying quickly, pay for an official battery swap rather than spending hundreds on a replacement gadget.`,
+        `Explore modular brands (such as Fairphone or Framework Laptop) that supply spare parts directly to your door with repair guides.`
+      ],
       comparisons: ["Modular Architecture Device", "Certified Refurbished Model"]
     };
   }
@@ -697,7 +727,11 @@ function generateTailoredFallback(query) {
         "Tires and brake pads wear continuously into municipal storm drains and particulate smog.",
         "Heavily integrated electronics complicate long-term DIY mechanical repairs."
       ],
-      swapAdvice: `To lower your transport footprint, consider smaller battery models or efficient hybrid options that don't carry excess battery weight, and maintain steady tire pressures to avoid rapid rubber wear.`,
+      swapPointers: [
+        `If you can charge at home and drive regularly, pick an EV with a modest battery capacity (40–60 kWh) to avoid hauling unnecessary battery mass.`,
+        `If you rely on street parking without reliable chargers, an efficient hybrid vehicle cuts emissions by 40% without battery charging stress.`,
+        `Keep tire pressures calibrated monthly—under-inflated tires increase fuel consumption and wear through rubber compounds 25% faster.`
+      ],
       comparisons: ["Lightweight Hybrid Option", "Compact Electric Vehicle"]
     };
   }
@@ -731,7 +765,11 @@ function generateTailoredFallback(query) {
       "Most wear parts are discarded straight into regular household trash.",
       "Upstream factory manufacturing causes more carbon than its day-to-day use."
     ],
-    swapAdvice: `Consider checking for durable stainless steel, solid wood, or glass alternatives of ${query} that avoid glued plastics and can be cleaned, repaired, or recycled cleanly.`,
+    swapPointers: [
+      `Choose models built from solid wood, stainless steel, or unpainted aluminum rather than thin glued plastics.`,
+      `Check if the brand sells individual replacement screws, pads, or covers before buying so you can fix it instead of replacing it.`,
+      `Buy second-hand or certified refurbished versions of ${query} to prevent new raw materials from being extracted.`
+    ],
     comparisons: [`Durable Metal ${query}`, `Recycled Alternative`]
   };
 }
@@ -787,6 +825,16 @@ function buildCard(item, isSecondary) {
     .map(f => `<li>${f}</li>`)
     .join("");
 
+  const pointersList = item.swapPointers || (item.swapAdvice ? [item.swapAdvice] : [
+    "Choose certified durable materials that avoid mixed glues.",
+    "Repair worn parts instead of throwing away the full item.",
+    "Look for second-hand or refurbished models to reduce virgin factory demand."
+  ]);
+
+  const swapHTML = pointersList
+    .map(pt => `<li>${pt}</li>`)
+    .join("");
+
   card.innerHTML = `
     <div class="card-top">
       <div>
@@ -838,7 +886,7 @@ function buildCard(item, isSecondary) {
 
     <div class="swap-panel">
       <div class="panel-title-green">Should You Swap?</div>
-      <p>${item.swapAdvice}</p>
+      <ul class="swap-list">${swapHTML}</ul>
     </div>
   `;
 
