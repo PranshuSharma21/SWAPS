@@ -581,13 +581,33 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   color: var(--green);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.45rem;
 }
 
-.swap-panel p {
-  font-size: 0.9rem;
+.swap-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.swap-list li {
+  font-size: 0.88rem;
   color: #065f46;
   font-weight: 600;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.45;
+}
+
+.swap-list li::before {
+  content: "✔";
+  color: var(--green);
+  font-weight: 800;
+  font-size: 0.82rem;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
 }
 
 .modal-backdrop {
