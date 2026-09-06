@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/SDG-12%20Responsible%20Consumption-059669?style=for-the-badge" alt="SDG 12" />
     <img src="https://img.shields.io/badge/Graphics-Three.js%20WebGL-000000?style=for-the-badge&logo=three.js" alt="Three.js" />
     <img src="https://img.shields.io/badge/AI-Groq%20Llama%203.3-f97316?style=for-the-badge" alt="Groq AI" />
-    <img src="https://img.shields.io/badge/License-MIT-09090b?style=for-the-badge" alt="License" />
+    
   </p>
 
   <img src="https://capsule-render.vercel.app/api?type=waving&color=2563eb&height=70&section=header" width="100%" alt="Header Wave" />
