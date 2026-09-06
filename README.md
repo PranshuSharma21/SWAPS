@@ -1,3 +1,4 @@
+## SWAPS
 <div align="center">
 
   <img src="https://readme-typing-svg.demolab.com?font=Plus+Jakarta+Sans&weight=800&size=36&duration=3000&pause=1000&color=2563EB&center=true&vCenter=true&width=650&height=70&lines=S.W.A.P.S.;Should+You+Swap%3F;Audit+Impact+Before+You+Buy;Circular+Material+Simulator" alt="SWAPS Header Animation" />
